@@ -1,0 +1,23 @@
+﻿@using BindReader
+@using Microsoft.Extensions.Options
+@inject IOptions<Class> classAccess
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<h2>@classAccess.Value.Name</h2>
+@foreach (var item in classAccess.Value.Items)
+{
+    <div>
+        <h2>@item.Language</h2>
+        <h2>@item.Tool</h2>
+    </div>
+}
+<body>
+</body>
+</html>

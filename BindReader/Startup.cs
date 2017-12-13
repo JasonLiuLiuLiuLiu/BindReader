@@ -23,6 +23,8 @@ namespace BindReader
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<Class>(Configuration);
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,22 +35,23 @@ namespace BindReader
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                //var con = new ConfigurationBuilder().AddJsonFile("appsettings.json");
-                //Configuration = con.Build();
-                var myClass = new Class();
-               
-                Configuration.Bind(myClass);
-                Console.WriteLine($"name:{myClass.Name}");
-                Console.WriteLine();
-                for (int i = 0; i < myClass.Items.Count; i++)
-                {
-                    await context.Response.WriteAsync($"language:{myClass.Items[i].Language}");
-                    await context.Response.WriteAsync($"tool:{myClass.Items[i].Tool}");
-                }
-                await context.Response.WriteAsync("Hello World!");
-            });
+             app.UseMvcWithDefaultRoute();
+            //app.Run(async (context) =>
+            //{
+            //    //var con = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+            //    //Configuration = con.Build();
+            //    var myClass = new Class();
+
+            //    Configuration.Bind(myClass);
+            //    Console.WriteLine($"name:{myClass.Name}");
+            //    Console.WriteLine();
+            //    for (int i = 0; i < myClass.Items.Count; i++)
+            //    {
+            //        await context.Response.WriteAsync($"language:{myClass.Items[i].Language}");
+            //        await context.Response.WriteAsync($"tool:{myClass.Items[i].Tool}");
+            //    }
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
         }
     }
 }
